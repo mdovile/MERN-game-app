@@ -51,12 +51,13 @@ export const AddModal = ( {title} ) => {
 
     return (
         <div>
-
-        <button type="button" className="openModalButton" style={{border: "none"}} data-toggle="modal" data-target="#exampleModal" onClick={toggle} >                     
-            <IconContext.Provider value={{ size: 35 }}>
-                <FaRegPlusSquare />
-            </IconContext.Provider>
-        </button>
+          <button type="button" className="btn pull-right shadow-none"
+           style={{border: "none", position: "absolute", right: 20, top: 38, zIndex:1}}
+           data-toggle="modal" data-target="#exampleModal" onClick={toggle} >                     
+              <IconContext.Provider value={{ size: 45 }}>
+                  <FaRegPlusSquare />
+              </IconContext.Provider>
+          </button>
 
       <Modal isOpen={modal} toggle={toggle}  backdrop='static'>
         <ModalHeader toggle={toggle}>Save To Your Games List</ModalHeader>
