@@ -1,6 +1,6 @@
 
 import React, { useState, useEffect, useContext } from "react";
-import axios from "axios";
+import { FaSearch } from 'react-icons/fa';
 import { GlobalContext } from '../context/GlobalState.js';
 
 export const Search = () => {
@@ -16,6 +16,7 @@ export const Search = () => {
     const findGame = e => {
         e.preventDefault();
         setSearchTitle(userInput);
+        setUserInput("");
     };
 
     const onChange = e => {
@@ -34,9 +35,12 @@ export const Search = () => {
             value={userInput}
             onChange={onChange} >
             </input>
-            <button className="searchGamesButton" type="submit">
-             Search
-        </button>
+            <div className="searchButtonContainer" style={{position: "relative"}}>
+                <button className="btn pull-right shadow-none" type="submit" 
+                style={{border: "none", position: "absolute", right: "0px", top: "-46px", zIndex: 1, width: "45px", height: "45px", background: "#ddd"}}>
+                <FaSearch />
+                </button>   
+            </div>
         </form>
     </div>
    

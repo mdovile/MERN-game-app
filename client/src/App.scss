@@ -38,10 +38,18 @@
   background-color:hsla(0, 2%, 12%, 0.445);
 }
 
+.searchButtonContainer button:hover {
+  background: #ccc;
+}
+
 .search-container{
   width: 800px;
   display: block;
   margin: 0 auto;
+}
+
+.searchButtonContainer button:hover {
+  background: #ccc;
 }
 
 input#search-bar{

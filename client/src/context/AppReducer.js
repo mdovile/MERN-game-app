@@ -4,14 +4,12 @@ export default (state, action) => {
             return {
                 ...state,
                 games: action.payload,
-                heading: 'Popular Games'
             }
 
         case 'GET_SEARCH_RESULTS':
             return {
                 ...state,
                 games: action.payload,
-                heading: 'Search Results'
             }
         case 'GET_GAMES':
             return {

@@ -6,7 +6,7 @@ import { CardDeck, Row} from 'reactstrap';
 
 export const Games = () => {
 
-    const { games, heading, getRandomGameList } = useContext(GlobalContext);
+    const { games, getRandomGameList } = useContext(GlobalContext);
 
     useEffect(() => {
         getRandomGameList();
@@ -17,7 +17,6 @@ export const Games = () => {
     return (
          <div className="container" >
             <Search />
-           <h3 className="text-center">{heading}</h3>
            <div id="list" className="row">
                 <Row xs="2">
                {gamesWithImages.map(game => (<Game key={game.id} game={game}/>))}

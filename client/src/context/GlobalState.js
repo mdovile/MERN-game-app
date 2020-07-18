@@ -4,7 +4,6 @@ import axios from 'axios';
 
 const initialState = {
     games: [],
-    heading: "",
     userGames: [],
     error: null,
 }
@@ -96,7 +95,6 @@ export const GlobalProvider = ({children}) => {
     return (<GlobalContext.Provider 
         value={{
             games: state.games, 
-            heading: state.heading, 
             error: state.error,
             getRandomGameList, 
             getSearchedGameList,
