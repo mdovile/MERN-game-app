@@ -5,8 +5,9 @@ import { Link } from 'react-router-dom';
 export const Game = ({ game }) => {
 
     return (
-            <Col sm="6" className="gameCards">
-            <Card className="game" style={{flex: 1}}>
+        <Link to={`details/${game.slug}`} >
+            <Col xs="6" className="gameCards">
+            <Card tag="a" className="game" style={{flex: 1, cursor: "pointer"}}>
             
             <CardImg top width="100px" height="350px" src={game.background_image} alt="Card image cap" />
             
@@ -15,11 +16,9 @@ export const Game = ({ game }) => {
                     <CardText>
                         Metacritic: {game.metacritic} 
                     </CardText>
-                    <Link to={`details/${game.slug}`}
-                         className="btn btn-primary btn-block"> More info
-                    </Link>
                 </CardBody>
             </Card>
             </Col>
+        </Link>
             )  
 }

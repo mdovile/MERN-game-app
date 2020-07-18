@@ -2,7 +2,7 @@ import React, { useContext, useEffect } from 'react';
 import { Game } from './Game';
 import { Search } from './Search';
 import { GlobalContext } from '../context/GlobalState.js';
-import { CardDeck} from 'reactstrap';
+import { CardDeck, Row} from 'reactstrap';
 
 export const Games = () => {
 
@@ -20,7 +20,9 @@ export const Games = () => {
            <h3 className="text-center">{heading}</h3>
            <div id="list" className="row">
             <CardDeck style={{display: 'flex', flexDirection: 'row'}}>
+                <Row xs="2">
                {gamesWithImages.map(game => (<Game key={game.id} game={game}/>))}
+               </Row>
             </CardDeck>
            </div>    
         </div>
