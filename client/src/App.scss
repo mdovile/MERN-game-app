@@ -20,6 +20,11 @@
   font-size: 42px;
 }
 
+.game:hover{ 
+  box-shadow: 1px 8px 20px grey;
+ -webkit-transition:  box-shadow .4s ease-in;
+}
+
 .gameCards {
   padding-top: 10px;
   padding-bottom: 10px;

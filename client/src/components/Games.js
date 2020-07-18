@@ -19,11 +19,9 @@ export const Games = () => {
             <Search />
            <h3 className="text-center">{heading}</h3>
            <div id="list" className="row">
-            <CardDeck style={{display: 'flex', flexDirection: 'row'}}>
                 <Row xs="2">
                {gamesWithImages.map(game => (<Game key={game.id} game={game}/>))}
                </Row>
-            </CardDeck>
            </div>    
         </div>
     )
