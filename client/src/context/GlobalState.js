@@ -39,13 +39,29 @@ export const GlobalProvider = ({children}) => {
     }
 
     async function getGames() {
-        try {
-            const res = await axios.get('/api/v1/games');
-            console.log(res.data.results);
+       /* axios.get('/api/v1/games')
+        .then((res) => {
+            console.log('called my api');
+            console.log(res.data.data);
             dispatch({
                 type: 'GET_GAMES',
-                payload: res.data.results
+                payload: res.data.data
             })
+        })
+        .catch(function (error) {
+            dispatch({
+                type: 'USER_GAME_LIST_ERROR',
+                payload: error.response.data.error
+            });
+        });*/
+        try {
+            const res = await axios.get('/api/v1/games');
+            console.log('called my api');
+            console.log(res.data.data);
+            dispatch({
+                type: 'GET_GAMES',
+                payload: res.data.data
+            });
         } catch (error) {
             dispatch({
                 type: 'USER_GAME_LIST_ERROR',
@@ -54,13 +70,38 @@ export const GlobalProvider = ({children}) => {
         }
     }
 
+    async function addGame(game) {
+        const config = {
+            headers: {
+              'Content-Type': 'application/json'
+            }
+          }
+      
+          try {
+            const res = await axios.post('/api/v1/games', game, config);
+      
+            dispatch({
+              type: 'ADD_GAME',
+              payload: res.data.data
+            });
+          } catch (err) {
+              console.log(err);
+            dispatch({
+              type: 'USER_GAME_LIST_ERROR',
+              payload: err.response.data.error
+            });
+          }
+    }
+
     return (<GlobalContext.Provider 
         value={{
             games: state.games, 
             heading: state.heading, 
+            error: state.error,
             getRandomGameList, 
             getSearchedGameList,
-            getGames
+            getGames,
+            addGame
             }}>       
         {children}
     </GlobalContext.Provider>);

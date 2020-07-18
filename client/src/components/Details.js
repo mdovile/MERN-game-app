@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { AddModal } from './AddModal';
 import axios from 'axios';
 import {
@@ -49,9 +49,7 @@ export const Details = ( props ) => {
         for(let i = 0; i < receivedPlatforms.length; i++ ) {
           platforms[i] = receivedPlatforms[i].platform;
         }
-
         setPlatforms(platforms); 
-        console.log(platforms);
       }));
     }, []);
 
@@ -104,7 +102,7 @@ export const Details = ( props ) => {
                    <Form inline>
                  <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
                      {name}
-                     <AddModal/>
+                     <AddModal title={name}/>
                 </FormGroup>
                 </Form>
                 </CardHeader>          

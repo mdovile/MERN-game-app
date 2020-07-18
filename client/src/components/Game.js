@@ -1,5 +1,5 @@
-import React, { useContext } from 'react';
-import { Card, CardBody, CardTitle, CardText, Button, Col, CardImg} from 'reactstrap';
+import React from 'react';
+import { Card, CardBody, CardTitle, CardText, Col, CardImg} from 'reactstrap';
 import { Link } from 'react-router-dom';
 
 export const Game = ({ game }) => {

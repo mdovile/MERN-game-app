@@ -7,7 +7,7 @@ import { Details } from './components/Details';
 import { AddedGamesTable } from './components/AddedGamesTable';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'regenerator-runtime/runtime';   //fixes regeneratorRuntime is not defined
-import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
+import {BrowserRouter as Router, Route} from 'react-router-dom';
 
 function App() {
   return (

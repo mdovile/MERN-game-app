@@ -6,6 +6,7 @@ export default (state, action) => {
                 games: action.payload,
                 heading: 'Popular Games'
             }
+
         case 'GET_SEARCH_RESULTS':
             return {
                 ...state,
@@ -17,11 +18,19 @@ export default (state, action) => {
                 ...state,
                 userGames: action.payload
             }
+
         case 'USER_GAME_LIST_ERROR':
             return {          
                 ...state,
                 error: action.payload      
             }
+
+        case 'ADD_GAME':
+            return {
+                ...state,
+                userGames: [...state.userGames, action.payload]
+            }
+
         default:
             return state;
     }

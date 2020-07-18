@@ -1,21 +1,20 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { FaRegPlusSquare } from 'react-icons/fa';
 import { IconContext } from "react-icons";
+import { GlobalContext } from '../context/GlobalState.js';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Form,
   Dropdown, DropdownToggle, DropdownMenu, DropdownItem, Input, Label} from 'reactstrap';
 
-export const AddModal =  (props) => {
+export const AddModal = ( {title} ) => {
     
-    const {
-        buttonLabel,
-        className
-      } = props;
     
+    const { addGame } = useContext(GlobalContext);
+
     const [modal, setModal] = useState(false);
     const [dropdownOpen, setDropdownOpen] = useState(false);
     const [platform, setPlatform] = useState('Platform');
-    const [bought, setBought] = useState(0);
-    const [sold, setSold] = useState(0);
+    const [amountPaid, setAmountPaid] = useState(0);
+    const [amountSold, setAmountSold] = useState(0);
     const [notes, setNotes] = useState('');
 
     const toggle = () => setModal(!modal);
@@ -27,15 +26,23 @@ export const AddModal =  (props) => {
 
     const handleSubmit = (e) => {
       e.preventDefault();
-      console.log(platform, bought, sold, notes);
+
+      const newGame = {
+        title,
+        platform,
+        amountPaid: +amountPaid,
+        amountSold: +amountSold,
+        notes
+      }
+      addGame(newGame);
     };
 
     const onPriceChange = e => {
-      setBought(e.target.value);
+      setAmountPaid(e.target.value);
     }
 
     const onSoldChange = e => {
-      setSold(e.target.value);
+      setAmountSold(e.target.value);
     }
 
     const onNotesChange = e => {
@@ -51,7 +58,7 @@ export const AddModal =  (props) => {
             </IconContext.Provider>
         </button>
 
-      <Modal isOpen={modal} toggle={toggle} className={className}  backdrop='static'>
+      <Modal isOpen={modal} toggle={toggle}  backdrop='static'>
         <ModalHeader toggle={toggle}>Save To Your Games List</ModalHeader>
         <Form onSubmit={handleSubmit}>
         <ModalBody>
@@ -71,9 +78,9 @@ export const AddModal =  (props) => {
               </DropdownMenu>
         </Dropdown>
         <Label for="pricePaid">Price paid</Label>
-        <Input type="number" name="paid" id="pricePaid" placeholder="$" className="w-25" onChange={onPriceChange}/>
+        <Input type="number" name="amountPaid" id="pricePaid" placeholder="$" className="w-25" onChange={onPriceChange}/>
         <Label for="priceSold">Sold for (optional)</Label>
-        <Input type="number" name="sold" id="priceSold" placeholder="$" className="w-25" onChange={onSoldChange}/>
+        <Input type="number" name="amountSold" id="priceSold" placeholder="$" className="w-25" onChange={onSoldChange}/>
         <Label for="descriptionText">Notes (optional)</Label>
         <Input type="textarea" name="descriptionText" id="descriptionText" onChange={onNotesChange} />
 
