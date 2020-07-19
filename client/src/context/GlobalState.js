@@ -37,24 +37,7 @@ export const GlobalProvider = ({children}) => {
         }
     }
 
-    async function getGames() {
-        /*
-        axios.get('/api/v1/games')
-        .then((res) => {
-            console.log('called my api');
-            console.log(res.data.data);
-            dispatch({
-                type: 'GET_GAMES',
-                payload: res.data.data
-            })
-        })
-        .catch(function (error) {
-            dispatch({
-                type: 'USER_GAME_LIST_ERROR',
-                payload: error.response.data.error
-            });
-        });*/
-        
+    async function getGames() {       
         try {
             const res = await axios.get('/api/v1/games');
             console.log('called my api');
@@ -93,6 +76,22 @@ export const GlobalProvider = ({children}) => {
           }
     }
 
+    async function deleteGame(id) {
+        try {
+          await axios.delete(`/api/v1/games/${id}`);
+    
+          dispatch({
+            type: 'DELETE_GAME',
+            payload: id
+          });
+        } catch (err) {
+          dispatch({
+            type: 'USER_GAME_LIST_ERROR',
+            payload: err.response.data.error
+          });
+        }
+      }
+
     return (<GlobalContext.Provider 
         value={{
             games: state.games, 
@@ -101,7 +100,8 @@ export const GlobalProvider = ({children}) => {
             getRandomGameList, 
             getSearchedGameList,
             getGames,
-            addGame
+            addGame,
+            deleteGame
             }}>       
         {children}
     </GlobalContext.Provider>);

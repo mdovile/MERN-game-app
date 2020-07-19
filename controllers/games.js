@@ -45,7 +45,7 @@ exports.addGame = async (req, res, next) => {
     };
 }
 
-//@route   DELETE  /api/v1/game/:ID
+//@route   DELETE  /api/v1/games/:ID
 exports.deleteGame = async (req, res, next) => {
     try {
         const game = await Game.findById(req.params.id);     
@@ -66,7 +66,29 @@ exports.deleteGame = async (req, res, next) => {
     } catch (error) {
         return res.status(500).json({
             success: false, 
-            error: 'Server error lol'
+            error: 'Server error'
         });
     }
 }
+
+    //@route   UPDATE  /api/v1/games/update
+    exports.updateGame = async (req, res) => {
+        try {
+            Game.findByIdAndUpdate( req.body.id, {amountSold: req.body.amountSold}, function(err, result) {
+                if (err) {
+                  res.send(err);
+                } else {
+                    console.log('updated game price paid')
+                    return res.status(200).json({
+                        success: true,
+                        data: {}
+                    });
+                }
+              })
+        } catch (error) {
+            return res.status(500).json({
+                success: false, 
+                error: 'Server error'
+            });
+        }
+    }

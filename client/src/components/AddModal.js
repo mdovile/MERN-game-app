@@ -5,7 +5,7 @@ import { GlobalContext } from '../context/GlobalState.js';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Form,
   Dropdown, DropdownToggle, DropdownMenu, DropdownItem, Input, Label} from 'reactstrap';
 
-export const AddModal = ( {title} ) => {
+export const AddModal = ( {title, slug} ) => {
     
     
     const { addGame } = useContext(GlobalContext);
@@ -32,7 +32,8 @@ export const AddModal = ( {title} ) => {
         platform,
         amountPaid: +amountPaid,
         amountSold: +amountSold,
-        notes
+        notes,
+        slug
       }
       addGame(newGame);
     };

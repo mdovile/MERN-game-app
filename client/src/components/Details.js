@@ -20,6 +20,7 @@ export const Details = ( props ) => {
     const [description, setDescription] = useState('');
     const [metacritic, setmetacritic] = useState('');
     const [developers, setDevelopers] = useState([{}]);
+    const [slug, setSlug] = useState('');
 
     const [activeIndex, setActiveIndex] = useState(0);
     const [animating, setAnimating] = useState(false);
@@ -45,6 +46,8 @@ export const Details = ( props ) => {
         let developers = detailsResponse.data.developers;
         setDevelopers(developers);
         let receivedPlatforms = detailsResponse.data.platforms;
+        let slug =  detailsResponse.data.slug;
+        setSlug(slug);
 
         for(let i = 0; i < receivedPlatforms.length; i++ ) {
           platforms[i] = receivedPlatforms[i].platform;
@@ -102,7 +105,7 @@ export const Details = ( props ) => {
                    <Form inline>
                  <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
                      {name}
-                     <AddModal title={name}/>
+                     <AddModal title={name} slug={slug}/>
                 </FormGroup>
                 </Form>
                 </CardHeader>          

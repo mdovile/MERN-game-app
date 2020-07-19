@@ -29,6 +29,12 @@ export default (state, action) => {
                 userGames: [...state.userGames, action.payload]
             }
 
+        case 'DELETE_GAME':
+            return {
+                ...state,
+                userGames: state.userGames.filter(game => game._id !== action.payload)
+            }
+
         default:
             return state;
     }

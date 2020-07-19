@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
-const { getGames, addGame, deleteGame } = require('../controllers/games');
+const { getGames, addGame, deleteGame, updateGame } = require('../controllers/games');
+
 
 router
     .route('/')
@@ -10,5 +11,9 @@ router
 router
     .route('/:id')
     .delete(deleteGame);
+
+router
+    .route('/update')
+    .put(updateGame);
 
 module.exports = router;
