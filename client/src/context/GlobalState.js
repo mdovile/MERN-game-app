@@ -4,7 +4,7 @@ import axios from 'axios';
 
 const initialState = {
     games: [],
-    userGames: [],
+    userGames: [{}],
     error: null,
 }
 
@@ -38,7 +38,8 @@ export const GlobalProvider = ({children}) => {
     }
 
     async function getGames() {
-       /* axios.get('/api/v1/games')
+        /*
+        axios.get('/api/v1/games')
         .then((res) => {
             console.log('called my api');
             console.log(res.data.data);
@@ -53,10 +54,10 @@ export const GlobalProvider = ({children}) => {
                 payload: error.response.data.error
             });
         });*/
+        
         try {
             const res = await axios.get('/api/v1/games');
             console.log('called my api');
-            console.log(res.data.data);
             dispatch({
                 type: 'GET_GAMES',
                 payload: res.data.data
@@ -96,6 +97,7 @@ export const GlobalProvider = ({children}) => {
         value={{
             games: state.games, 
             error: state.error,
+            userGames: state.userGames,
             getRandomGameList, 
             getSearchedGameList,
             getGames,

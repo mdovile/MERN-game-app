@@ -9,11 +9,7 @@ export const AddedGamesTable = () => {
     
   useEffect(() => {
       getGames();
-      console.log(userGames);
   }, []);
-
-  
-  // {userGames.map(game => (<AddedGameRow game={game} />))}
 
     return (
         <Table hover responsive>
@@ -27,7 +23,7 @@ export const AddedGamesTable = () => {
           </tr>
         </thead>
         <tbody>
-       
+        {userGames.map(game => (<AddedGameRow game={game} key={game._id} />))}
           </tbody>
           </Table>
     );

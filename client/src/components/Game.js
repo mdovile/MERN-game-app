@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 export const Game = ({ game }) => {
 
     return (
-        <Link to={`details/${game.slug}`} >
+        <Link to={`details/${game.slug}`} style={{textDecoration: "none"}}>
             <Col xs="6" className="gameCards">
             <Card tag="a" className="game" style={{flex: 1, cursor: "pointer"}}>
             
