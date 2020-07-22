@@ -6,21 +6,21 @@ import { Games } from './components/Games';
 import { Details } from './components/Details';
 import { AddedGamesTable } from './components/AddedGamesTable';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import 'regenerator-runtime/runtime';   //fixes regeneratorRuntime is not defined
-import {BrowserRouter as Router, Route} from 'react-router-dom';
+import 'regenerator-runtime/runtime'; //fixes regeneratorRuntime is not defined
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 function App() {
   return (
     <GlobalProvider>
-    <Router>
+      <Router>
         <Navbar />
-        <div className="container" >
-        <Route exact path="/" component={Games} />
-        <Route exact path="/details/:slug" component={Details} />
-        <Route exact path="/myGames" component={AddedGamesTable} />
+        <div className="container">
+          <Route exact path="/" component={Games} />
+          <Route exact path="/details/:slug" component={Details} />
+          <Route exact path="/myGames" component={AddedGamesTable} />
         </div>
-        </Router>  
-    </GlobalProvider> 
+      </Router>
+    </GlobalProvider>
   );
 }
 

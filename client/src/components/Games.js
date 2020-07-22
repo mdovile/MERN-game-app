@@ -2,26 +2,27 @@ import React, { useContext, useEffect } from 'react';
 import { Game } from './Game';
 import { Search } from './Search';
 import { GlobalContext } from '../context/GlobalState.js';
-import { CardDeck, Row} from 'reactstrap';
+import { Row } from 'reactstrap';
 
 export const Games = () => {
+  const { games, getRandomGameList } = useContext(GlobalContext);
 
-    const { games, getRandomGameList } = useContext(GlobalContext);
+  useEffect(() => {
+    getRandomGameList();
+  }, []);
 
-    useEffect(() => {
-        getRandomGameList();
-    }, []);
+  const gamesWithImages = games.filter((game) => game.background_image);
 
-    const gamesWithImages = games.filter(game => game.background_image);
-
-    return (
-         <div className="container" >
-            <Search />
-           <div id="list" className="row">
-                <Row xs="2">
-               {gamesWithImages.map(game => (<Game key={game.id} game={game}/>))}
-               </Row>
-           </div>    
-        </div>
-    )
-}
+  return (
+    <div className="container">
+      <Search />
+      <div id="list" className="row">
+        <Row xs="2">
+          {gamesWithImages.map((game) => (
+            <Game key={game.id} game={game} />
+          ))}
+        </Row>
+      </div>
+    </div>
+  );
+};
