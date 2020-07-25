@@ -78,7 +78,6 @@ exports.deleteGame = async (req, res, next) => {
                 if (err) {
                   res.send(err);
                 } else {
-                    console.log('updated game price paid')
                     return res.status(200).json({
                         success: true,
                         data: {}

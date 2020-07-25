@@ -9,16 +9,6 @@ export const AddedGameRow = ({ game }) => {
   const [sold, setSold] = useState(game.amountSold);
 
   const inputRef = useRef();
-  /*
-  useEffect(() => {
-    const updateBody = {
-     id,
-     sendToDb: +sendToDb
-    }
-    
-
-    updateGameSold(updateBody);
-  }, [sendToDb]);*/
 
   return (
     <tr>
