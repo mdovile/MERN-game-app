@@ -13,8 +13,8 @@ function App() {
     <GlobalProvider>
       <Router>
         <Header />
-        <div className="container">
           <Route exact path="/" component={Games} />
+          <div className="container">
           <Route exact path="/details/:slug" component={Details} />
           <Route exact path="/myGames" component={AddedGamesTable} />
         </div>

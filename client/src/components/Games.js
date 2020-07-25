@@ -19,7 +19,7 @@ export const Games = () => {
       <Search />
       <Row>
         {gamesWithImages.map((game) => (
-          <Col sm={6} style={{offset: 2}}>
+          <Col sm={6}>
             <Game key={game.id} game={game} />
           </Col>
         ))}
