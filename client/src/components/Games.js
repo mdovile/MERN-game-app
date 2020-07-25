@@ -9,6 +9,7 @@ export const Games = () => {
 
   useEffect(() => {
     getRandomGameList();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const gamesWithImages = games.filter((game) => game.background_image);

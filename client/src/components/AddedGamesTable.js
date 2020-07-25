@@ -14,6 +14,7 @@ export const AddedGamesTable = () => {
 
   useEffect(() => {
     getGames();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const indexOfLastGame = currentPage * gamesPerPage;

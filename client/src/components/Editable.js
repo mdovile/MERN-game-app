@@ -23,6 +23,7 @@ export const Editable = ({ game, childRef, text, type, placeholder, children, ..
       };
       updateGameSold(updateBody);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isEditing, childRef]);
 
   // Event handler while pressing any key while editing

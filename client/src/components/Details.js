@@ -52,6 +52,7 @@ export const Details = (props) => {
         setPlatforms(platforms);
       }),
     );
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const next = () => {

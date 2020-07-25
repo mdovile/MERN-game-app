@@ -9,6 +9,7 @@ export const Search = () => {
 
   useEffect(() => {
     getSearchedGameList(searchTitle);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchTitle]);
 
   const findGame = (e) => {
