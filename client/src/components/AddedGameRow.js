@@ -32,8 +32,7 @@ export const AddedGameRow = ({ game }) => {
       </td>
       <button
         type="button"
-        className="btn shadow-none"
-        style={{ border: 'none' }}
+        style={{ border: 'none', boxShadow: 'none', backgroundColor: 'transparent' }}
         onClick={() => deleteGame(game._id)}
       >
         {' '}

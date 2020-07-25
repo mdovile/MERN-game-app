@@ -9,6 +9,7 @@ import {
   CarouselCaption,
   Form,
 } from 'reactstrap';
+import { ListGroup, ListGroupItem } from 'reactstrap';
 import { Card, CardText, CardBody, CardHeader, FormGroup } from 'reactstrap';
 
 export const Details = (props) => {
@@ -102,7 +103,7 @@ export const Details = (props) => {
         <CardBody>
           <CardHeader className="detailsGameTitle">
             <Form inline>
-              <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
+              <FormGroup>
                 {name}
                 <AddModal title={name} slug={slug} />
               </FormGroup>
@@ -110,34 +111,36 @@ export const Details = (props) => {
           </CardHeader>
           <br />
 
-          <ul className="list-group mt-3">
-            <li className="list-group-item">
+          <ListGroup>
+            <ListGroupItem>
               <strong>Metacritic</strong>: {metacritic}
-            </li>
-            <li className="list-group-item">
+            </ListGroupItem>
+            <ListGroupItem>
               <strong>Release</strong>: {release}
-            </li>
-            <li className="list-group-item">
+            </ListGroupItem>
+            <ListGroupItem>
               <strong>Developed by</strong>:
               <ul>
                 {developers.map((dev) => (
                   <li key={dev.id}> {dev.name} </li>
                 ))}
               </ul>
-            </li>
-            <li className="list-group-item">
+            </ListGroupItem>
+            <ListGroupItem>
               <strong>Platforms</strong>:
               <ul>
                 {platforms.map((platform) => (
                   <li key={platform.id}>{platform.name}</li>
                 ))}
               </ul>
-            </li>
-          </ul>
+            </ListGroupItem>
 
-          <CardText>
-            <p className="card-text" dangerouslySetInnerHTML={{ __html: description }}></p>
-          </CardText>
+            <ListGroupItem>
+              <CardText>
+                <p dangerouslySetInnerHTML={{ __html: description }}></p>
+              </CardText>
+            </ListGroupItem>
+          </ListGroup>
         </CardBody>
       </Card>
     </div>

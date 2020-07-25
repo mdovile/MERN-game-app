@@ -2,7 +2,7 @@ import React, { useContext, useEffect } from 'react';
 import { Game } from './Game';
 import { Search } from './Search';
 import { GlobalContext } from '../context/GlobalState.js';
-import { Row } from 'reactstrap';
+import { Row, Container, Col } from 'reactstrap';
 
 export const Games = () => {
   const { games, getRandomGameList } = useContext(GlobalContext);
@@ -15,15 +15,15 @@ export const Games = () => {
   const gamesWithImages = games.filter((game) => game.background_image);
 
   return (
-    <div className="container">
+    <Container>
       <Search />
-      <div id="list" className="row">
-        <Row xs="2">
-          {gamesWithImages.map((game) => (
+      <Row>
+        {gamesWithImages.map((game) => (
+          <Col sm={6} style={{offset: 2}}>
             <Game key={game.id} game={game} />
-          ))}
-        </Row>
-      </div>
-    </div>
+          </Col>
+        ))}
+      </Row>
+    </Container>
   );
 };

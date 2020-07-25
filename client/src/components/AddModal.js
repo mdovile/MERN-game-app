@@ -64,8 +64,7 @@ export const AddModal = ({ title, slug }) => {
     <div>
       <button
         type="button"
-        className="btn pull-right shadow-none"
-        style={{ border: 'none', position: 'absolute', right: 20, top: 38, zIndex: 1 }}
+        style={{ border: 'none', position: 'absolute', right: 20, top: 28, zIndex: 1, boxShadow: 'none', backgroundColor: 'transparent' }}
         data-toggle="modal"
         data-target="#exampleModal"
         onClick={toggle}

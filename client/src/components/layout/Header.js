@@ -1,11 +1,14 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { FaGamepad } from 'react-icons/fa';
+import { Navbar } from 'reactstrap';
 
-const Navbar = () => {
+const Header = () => {
   return (
-    <nav className="navbar navbar-dark bg-dark" style={{ textAlign: 'center', display: 'block' }}>
-      <span className="navbar-brand mb-0 h1 mx-auto" style={{ textAlign: 'center' }}>
+    <Navbar
+      style={{ textAlign: 'center', display: 'block', backgroundColor: '#3e3f40' }}
+    >
+      <span style={{ textAlign: 'center', fontWeight: 'bold' }}>
         <Link to="/" style={{ textDecoration: 'none' }}>
           FIND GAMES
         </Link>
@@ -15,15 +18,14 @@ const Navbar = () => {
         style={{
           position: 'absolute',
           right: 20,
-          top: 18,
           textDecoration: 'none',
           textAlign: 'right',
         }}
       >
         My Games <FaGamepad />
       </Link>
-    </nav>
+    </Navbar>
   );
 };
 
-export default Navbar;
+export default Header;

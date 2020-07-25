@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.scss';
-import Navbar from './components/layout/Navbar';
+import Header from './components/layout/Header';
 import { GlobalProvider } from './context/GlobalState';
 import { Games } from './components/Games';
 import { Details } from './components/Details';
@@ -12,7 +12,7 @@ function App() {
   return (
     <GlobalProvider>
       <Router>
-        <Navbar />
+        <Header />
         <div className="container">
           <Route exact path="/" component={Games} />
           <Route exact path="/details/:slug" component={Details} />
