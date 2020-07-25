@@ -4,7 +4,7 @@ import axios from 'axios';
 
 const initialState = {
   games: [],
-  userGames: [{}],
+  userGames: [],
   error: null,
 };
 

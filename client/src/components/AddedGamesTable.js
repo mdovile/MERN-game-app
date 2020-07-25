@@ -1,15 +1,24 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Table } from 'reactstrap';
 import { AddedGameRow } from './AddedGameRow';
 import { GlobalContext } from '../context/GlobalState.js';
 import { MdModeEdit } from 'react-icons/md';
+import TablePagination from './TablePagination';
 
 export const AddedGamesTable = () => {
   const { userGames, getGames } = useContext(GlobalContext);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [gamesPerPage] = useState(10);
+
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   useEffect(() => {
     getGames();
   }, []);
+
+  const indexOfLastGame = currentPage * gamesPerPage;
+  const indexOfFirstGame = indexOfLastGame - gamesPerPage;
+  const currentGames = userGames.slice(indexOfFirstGame, indexOfLastGame);
 
   return (
     <Table hover responsive>
@@ -25,10 +34,15 @@ export const AddedGamesTable = () => {
         </tr>
       </thead>
       <tbody>
-        {userGames.map((game) => (
+        {currentGames.map((game) => (
           <AddedGameRow game={game} key={game._id} />
         ))}
       </tbody>
+      <TablePagination
+        gamesPerPage={gamesPerPage}
+        totalGames={userGames.length}
+        paginate={paginate}
+      />
     </Table>
   );
 };
