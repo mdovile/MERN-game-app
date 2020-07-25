@@ -16,7 +16,7 @@ export const GlobalProvider = ({ children }) => {
   async function getRandomGameList() {
     try {
       const res = await axios.get(
-        'https://api.rawg.io/api/games?dates=2019-01-01,2020-06-30&ordering=-rating/?page_size=5',
+        'https://api.rawg.io/api/games',
       );
       dispatch({
         type: 'GET_RANDOM_GAME_LIST',

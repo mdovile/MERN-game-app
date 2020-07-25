@@ -117,7 +117,12 @@ export const Details = (props) => {
               <strong>Release</strong>: {release}
             </li>
             <li className="list-group-item">
-              <strong>Developed by</strong>: {developers.map((dev) => `${dev.name} `)}
+              <strong>Developed by</strong>:
+              <ul>
+                {developers.map((dev) => (
+                  <li key={dev.id}> {dev.name} </li>
+                ))}
+              </ul>
             </li>
             <li className="list-group-item">
               <strong>Platforms</strong>:

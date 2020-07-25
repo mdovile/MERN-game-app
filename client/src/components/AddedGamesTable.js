@@ -21,28 +21,30 @@ export const AddedGamesTable = () => {
   const currentGames = userGames.slice(indexOfFirstGame, indexOfLastGame);
 
   return (
-    <Table hover responsive>
-      <thead>
-        <tr>
-          <th>Title</th>
-          <th>Platform</th>
-          <th>Notes</th>
-          <th>Paid</th>
-          <th>
-            Sold <MdModeEdit />
-          </th>
-        </tr>
-      </thead>
-      <tbody>
-        {currentGames.map((game) => (
-          <AddedGameRow game={game} key={game._id} />
-        ))}
-      </tbody>
+    <div className="userGamesTable">
+      <Table hover responsive>
+        <thead>
+          <tr>
+            <th>Title</th>
+            <th>Platform</th>
+            <th>Notes</th>
+            <th>Paid</th>
+            <th>
+              Sold <MdModeEdit />
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          {currentGames.map((game) => (
+            <AddedGameRow game={game} key={game._id} />
+          ))}
+        </tbody>
+      </Table>
       <TablePagination
         gamesPerPage={gamesPerPage}
         totalGames={userGames.length}
         paginate={paginate}
       />
-    </Table>
+    </div>
   );
 };
