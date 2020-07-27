@@ -10,16 +10,18 @@ dotenv.config({ path: './config/config.env' });
 connectDB();
 
 const games = require('./routes/games');
+const users = require('./routes/users');
 
 const app = express();
 
-app.use(express.json()); //body parser
+app.use(express.json({extended: false})); //body parser middleware
 
 if (process.env.NODE_ENV === 'development') {
   app.use(morgan('dev')); //logger middleware
 }
 
 app.use('/api/v1/games', games);
+app.use('/api/v1/users', users);
 
 //serve static assets in production
 if (process.env.NODE_ENV === 'production') {
