@@ -22,6 +22,9 @@ const GameSchema = new mongoose.Schema({
     },
     slug: {
         type: String
+    },
+    userId: {
+        type: String
     }
 });
 

@@ -1,18 +1,18 @@
 const express = require('express');
 const router = express.Router();
-const { check, validationResult } = require('express-validator');
 const User = require('../models/User');
-const bcrypt = require('bcryptjs');
+const auth = require('../middleware/auth');
+const { check, validationResult } = require('express-validator');
 const jwt = require('jsonwebtoken');
+const bcrypt = require('bcryptjs');
 
-//@route POST api/v1/users
-//@desc register user
+//@route POST api/v1/auth
+//@desc Authenticate user and get token
 router.post(
   '/',
   [
-    check('name', 'Name is required').not().isEmpty(),
     check('email', 'Please include a valid email').isEmail(),
-    check('password', 'Please enter a password with at least 6 characters').isLength({ min: 6 }),
+    check('password', 'Enter password').exists(),
   ],
   async (req, res) => {
     const errors = validationResult(req);
@@ -20,25 +20,20 @@ router.post(
       return res.status(400).json({ errors: errors.array() });
     }
 
-    const { name, email, password } = req.body;
+    const { email, password } = req.body;
 
     try {
-      //does user exist
       let user = await User.findOne({ email });
-      if (user) {
-        return res.status(400).json({ errors: [{ msg: 'User already exists' }] });
+      if (!user) {
+        return res.status(400).json({ errors: [{ msg: 'Invalid Credentials' }] });
       }
 
-      user = new User({
-        name,
-        email,
-        password,
-      });
+      //compare entered password (text) with password (for user found with given email) from db
+      const isMatch = await bcrypt.compare(password, user.password);
 
-      //encrypt password
-      const salt = await bcrypt.genSalt(10);
-      user.password = await bcrypt.hash(password, salt);
-      await user.save();
+      if (!isMatch) {
+        return res.status(400).json({ errors: [{ msg: 'Invalid Credentials' }] });
+      }
 
       //return jsonwebtoken
       const payload = {
