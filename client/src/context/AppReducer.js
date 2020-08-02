@@ -40,6 +40,24 @@ export default (state, action) => {
         ...state,
         userGames: [...state.userGames, action.payload],
       };
+    case 'LOGIN_SUCCESS':
+    case 'REGISTER_SUCCESS':
+      localStorage.setItem('token', action.payload.token);
+      return {
+        ...state,
+        ...action.payload,
+        isAuthenticated: true,
+      };
+    case 'LOGIN_FAIL':
+    case 'LOGOUT_SUCCESS':
+    case 'REGISTER_FAIL':
+      localStorage.removeItem('token');
+      return {
+        ...state,
+        token: null,
+        isAuthenticated: false,
+        error: action.payload
+      };
 
     default:
       return state;

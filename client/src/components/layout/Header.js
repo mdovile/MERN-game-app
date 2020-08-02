@@ -5,9 +5,7 @@ import { Navbar } from 'reactstrap';
 
 const Header = () => {
   return (
-    <Navbar
-      style={{ textAlign: 'center', display: 'block', backgroundColor: '#3e3f40' }}
-    >
+    <Navbar style={{ textAlign: 'center', display: 'block', backgroundColor: '#3e3f40' }}>
       <span style={{ textAlign: 'center', fontWeight: 'bold' }}>
         <Link to="/" style={{ textDecoration: 'none' }}>
           FIND GAMES
@@ -24,6 +22,8 @@ const Header = () => {
       >
         My Games <FaGamepad />
       </Link>
+      <Link to="/login">Login</Link>
+      <Link to="/register">Sign up</Link>
     </Navbar>
   );
 };

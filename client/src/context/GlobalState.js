@@ -6,6 +6,9 @@ const initialState = {
   games: [],
   userGames: [],
   error: null,
+  token: localStorage.getItem('token'),
+  isAuthenticated: null,
+  user: null,
 };
 
 export const GlobalContext = createContext(initialState);
@@ -15,9 +18,7 @@ export const GlobalProvider = ({ children }) => {
 
   async function getRandomGameList() {
     try {
-      const res = await axios.get(
-        'https://api.rawg.io/api/games',
-      );
+      const res = await axios.get('https://api.rawg.io/api/games');
       dispatch({
         type: 'GET_RANDOM_GAME_LIST',
         payload: res.data.results,
@@ -109,18 +110,42 @@ export const GlobalProvider = ({ children }) => {
     }
   }
 
+  async function register(newUser) {
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    };
+  
+    try {
+      const res = await axios.post('/api/v1/users', newUser, config);
+      dispatch({
+        type: 'REGISTER_SUCCESS',
+        payload: res.data,
+      });
+    } catch (error) {
+      dispatch({
+        type: 'REGISTER_FAIL',
+        payload: error.response.data.error,
+      });
+      console.log(error.response.data.error)
+    }
+  }
+
   return (
     <GlobalContext.Provider
       value={{
         games: state.games,
         error: state.error,
         userGames: state.userGames,
+        user: state.user,
         getRandomGameList,
         getSearchedGameList,
         getGames,
         addGame,
         deleteGame,
         updateGameSold,
+        register,
       }}
     >
       {children}
