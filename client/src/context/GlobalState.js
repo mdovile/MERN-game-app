@@ -7,7 +7,7 @@ const initialState = {
   userGames: [],
   error: null,
   token: localStorage.getItem('token'),
-  isAuthenticated: null,
+  isAuthenticated: false,
   user: null,
 };
 
@@ -42,7 +42,17 @@ export const GlobalProvider = ({ children }) => {
 
   async function getGames() {
     try {
-      const res = await axios.get('/api/v1/games');
+      const config = {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      };
+
+      if (state.token) {
+        config.headers['x-auth-token'] = state.token;
+      }
+
+      const res = await axios.get('/api/v1/games', config);
       dispatch({
         type: 'GET_GAMES',
         payload: res.data.data,
@@ -61,6 +71,10 @@ export const GlobalProvider = ({ children }) => {
         'Content-Type': 'application/json',
       },
     };
+
+    if (state.token) {
+      config.headers['x-auth-token'] = state.token;
+    }
 
     try {
       const res = await axios.post('/api/v1/games', game, config);
@@ -116,7 +130,7 @@ export const GlobalProvider = ({ children }) => {
         'Content-Type': 'application/json',
       },
     };
-  
+
     try {
       const res = await axios.post('/api/v1/users', newUser, config);
       dispatch({
@@ -128,7 +142,35 @@ export const GlobalProvider = ({ children }) => {
         type: 'REGISTER_FAIL',
         payload: error.response.data.error,
       });
-      console.log(error.response.data.error)
+      console.log(error.response.data.error);
+    }
+  }
+
+  function logout() {
+    dispatch({
+      type: 'LOGOUT',
+    });
+  }
+
+  async function login(credentials) {
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    };
+    try {
+      const res = await axios.post('/api/v1/auth', credentials, config);
+      dispatch({
+        type: 'LOGIN_SUCCESS',
+        payload: res.data,
+      });
+      return true;
+    } catch (error) {
+      dispatch({
+        type: 'LOGIN_FAIL',
+        payload: error.response.data.error,
+      });
+      return false;
     }
   }
 
@@ -138,7 +180,8 @@ export const GlobalProvider = ({ children }) => {
         games: state.games,
         error: state.error,
         userGames: state.userGames,
-        user: state.user,
+        isAuthenticated: state.isAuthenticated,
+        token: state.token,
         getRandomGameList,
         getSearchedGameList,
         getGames,
@@ -146,6 +189,8 @@ export const GlobalProvider = ({ children }) => {
         deleteGame,
         updateGameSold,
         register,
+        logout,
+        login,
       }}
     >
       {children}

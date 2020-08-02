@@ -49,7 +49,7 @@ export default (state, action) => {
         isAuthenticated: true,
       };
     case 'LOGIN_FAIL':
-    case 'LOGOUT_SUCCESS':
+    case 'LOGOUT':
     case 'REGISTER_FAIL':
       localStorage.removeItem('token');
       return {

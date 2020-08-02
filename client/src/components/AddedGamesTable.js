@@ -6,7 +6,7 @@ import { MdModeEdit } from 'react-icons/md';
 import TablePagination from './TablePagination';
 
 export const AddedGamesTable = () => {
-  const { userGames, getGames } = useContext(GlobalContext);
+  const { userGames, getGames, isAuthenticated } = useContext(GlobalContext);
   const [currentPage, setCurrentPage] = useState(1);
   const [gamesPerPage] = useState(10);
 
@@ -14,6 +14,7 @@ export const AddedGamesTable = () => {
 
   useEffect(() => {
     getGames();
+    console.log(isAuthenticated);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
