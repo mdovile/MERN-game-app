@@ -9,6 +9,7 @@ const initialState = {
   token: localStorage.getItem('token'),
   isAuthenticated: false,
   user: null,
+  isLoading: false,
 };
 
 export const GlobalContext = createContext(initialState);
@@ -18,6 +19,9 @@ export const GlobalProvider = ({ children }) => {
 
   async function getRandomGameList() {
     try {
+      dispatch({
+        type: 'LOADING',
+      });
       const res = await axios.get('https://api.rawg.io/api/games');
       dispatch({
         type: 'GET_RANDOM_GAME_LIST',
@@ -41,6 +45,9 @@ export const GlobalProvider = ({ children }) => {
   }
 
   async function getGames() {
+    dispatch({
+      type: 'LOADING',
+    });
     try {
       const config = {
         headers: {
@@ -153,6 +160,10 @@ export const GlobalProvider = ({ children }) => {
   }
 
   async function login(credentials) {
+    dispatch({
+      type: 'LOADING',
+    });
+
     const config = {
       headers: {
         'Content-Type': 'application/json',
@@ -182,6 +193,7 @@ export const GlobalProvider = ({ children }) => {
         userGames: state.userGames,
         isAuthenticated: state.isAuthenticated,
         token: state.token,
+        isLoading: state.isLoading,
         getRandomGameList,
         getSearchedGameList,
         getGames,

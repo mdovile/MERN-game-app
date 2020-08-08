@@ -1,11 +1,12 @@
 import React, { useContext, useEffect } from 'react';
 import { Game } from './Game';
 import { Search } from './Search';
+import Spinner from './layout/Spinner';
 import { GlobalContext } from '../context/GlobalState.js';
 import { Row, Container, Col } from 'reactstrap';
 
 export const Games = () => {
-  const { games, getRandomGameList } = useContext(GlobalContext);
+  const { games, getRandomGameList, isLoading } = useContext(GlobalContext);
 
   useEffect(() => {
     getRandomGameList();
@@ -18,7 +19,8 @@ export const Games = () => {
     <Container>
       <Search />
       <Row>
-        {gamesWithImages.map((game) => (
+        { isLoading? <Spinner /> 
+        : gamesWithImages.map((game) => (
           <Col sm={6}>
             <Game key={game.id} game={game} />
           </Col>

@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { FaGamepad } from 'react-icons/fa';
+import { GrLogout } from 'react-icons/gr';
 import { Navbar, Button } from 'reactstrap';
 import { GlobalContext } from '../../context/GlobalState.js';
 import { useHistory } from 'react-router-dom';
@@ -18,12 +19,13 @@ const Header = () => {
         </Link>
       </span>
 
-      {isAuthenticated ? (
+      {isAuthenticated || token ? (
         <Link
           to="/myGames"
           style={{
             position: 'absolute',
             right: 20,
+            top: 8,
             textDecoration: 'none',
             textAlign: 'right',
           }}
@@ -31,20 +33,49 @@ const Header = () => {
           My Games <FaGamepad />
         </Link>
       ) : (
-        <Link to="/login">Login</Link>
+        <Link
+          style={{
+            position: 'absolute',
+            left: 12,
+            top: 6,
+            textDecoration: 'none',
+            textAlign: 'right',
+          }}
+          to="/login"
+        >
+          Login
+        </Link>
       )}
-      {isAuthenticated ? (
+      {isAuthenticated || token ? (
         <Button
+          style={{
+            position: 'absolute',
+            left: 12,
+            top: 0,
+            textDecoration: 'none',
+            textAlign: 'right',
+          }}
           onClick={() => {
             logout();
             history.push('/');
           }}
         >
           {' '}
-          Log Out{' '}
+          <GrLogout size={22} />{' '}
         </Button>
       ) : (
-        <Link to="/register">Sign up</Link>
+        <Link
+          style={{
+            position: 'absolute',
+            left: 65,
+            top: 6,
+            textDecoration: 'none',
+            textAlign: 'right',
+          }}
+          to="/register"
+        >
+          Sign up
+        </Link>
       )}
     </Navbar>
   );

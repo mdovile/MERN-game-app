@@ -13,7 +13,7 @@ export const Register = () => {
   let history = useHistory();
 
   function validateForm() {
-    return email.length > 0 && password.length > 6;
+    return email.length > 0 && password.length > 6 && name;
   }
 
   function signUp(event) {
@@ -24,7 +24,7 @@ export const Register = () => {
       password,
     };
     register(newUser);
-    history.push('/myGames');
+    history.push('/');
   }
 
   return (
@@ -36,7 +36,7 @@ export const Register = () => {
         </FormGroup>
         <FormGroup id="email" size="large">
           <Label>Email</Label>
-          <Input autoFocus type="email" value={email} onChange={(e) => setEmail(e.target.value)} />
+          <Input type="email" value={email} onChange={(e) => setEmail(e.target.value)} />
         </FormGroup>
         <FormGroup id="password" size="large">
           <Label>Password</Label>

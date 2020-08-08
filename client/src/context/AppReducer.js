@@ -4,6 +4,7 @@ export default (state, action) => {
       return {
         ...state,
         games: action.payload,
+        isLoading: false,
       };
 
     case 'GET_SEARCH_RESULTS':
@@ -15,6 +16,7 @@ export default (state, action) => {
       return {
         ...state,
         userGames: action.payload,
+        isLoading: false,
       };
 
     case 'USER_GAME_LIST_ERROR':
@@ -47,6 +49,7 @@ export default (state, action) => {
         ...state,
         ...action.payload,
         isAuthenticated: true,
+        isLoading: false,
       };
     case 'LOGIN_FAIL':
     case 'LOGOUT':
@@ -56,7 +59,13 @@ export default (state, action) => {
         ...state,
         token: null,
         isAuthenticated: false,
-        error: action.payload
+        error: action.payload,
+      };
+
+    case 'LOADING':
+      return {
+        ...state,
+        isLoading: true,
       };
 
     default:

@@ -23,7 +23,7 @@ export const Login = () => {
       password,
     };
     if (await login(userCredentials)) {
-      history.push('/myGames');
+      history.push('/');
     } else {
       setError(true);
       setEmail('');
