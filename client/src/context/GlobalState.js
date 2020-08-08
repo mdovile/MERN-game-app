@@ -6,6 +6,10 @@ const initialState = {
   games: [],
   userGames: [],
   error: null,
+  token: localStorage.getItem('token'),
+  isAuthenticated: false,
+  user: null,
+  isLoading: false,
 };
 
 export const GlobalContext = createContext(initialState);
@@ -15,9 +19,10 @@ export const GlobalProvider = ({ children }) => {
 
   async function getRandomGameList() {
     try {
-      const res = await axios.get(
-        'https://api.rawg.io/api/games',
-      );
+      dispatch({
+        type: 'LOADING',
+      });
+      const res = await axios.get('https://api.rawg.io/api/games');
       dispatch({
         type: 'GET_RANDOM_GAME_LIST',
         payload: res.data.results,
@@ -40,8 +45,21 @@ export const GlobalProvider = ({ children }) => {
   }
 
   async function getGames() {
+    dispatch({
+      type: 'LOADING',
+    });
     try {
-      const res = await axios.get('/api/v1/games');
+      const config = {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      };
+
+      if (state.token) {
+        config.headers['x-auth-token'] = state.token;
+      }
+
+      const res = await axios.get('/api/v1/games', config);
       dispatch({
         type: 'GET_GAMES',
         payload: res.data.data,
@@ -60,6 +78,10 @@ export const GlobalProvider = ({ children }) => {
         'Content-Type': 'application/json',
       },
     };
+
+    if (state.token) {
+      config.headers['x-auth-token'] = state.token;
+    }
 
     try {
       const res = await axios.post('/api/v1/games', game, config);
@@ -109,18 +131,78 @@ export const GlobalProvider = ({ children }) => {
     }
   }
 
+  async function register(newUser) {
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    };
+
+    try {
+      const res = await axios.post('/api/v1/users', newUser, config);
+      dispatch({
+        type: 'REGISTER_SUCCESS',
+        payload: res.data,
+      });
+    } catch (error) {
+      dispatch({
+        type: 'REGISTER_FAIL',
+        payload: error.response.data.error,
+      });
+      console.log(error.response.data.error);
+    }
+  }
+
+  function logout() {
+    dispatch({
+      type: 'LOGOUT',
+    });
+  }
+
+  async function login(credentials) {
+    dispatch({
+      type: 'LOADING',
+    });
+
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    };
+    try {
+      const res = await axios.post('/api/v1/auth', credentials, config);
+      dispatch({
+        type: 'LOGIN_SUCCESS',
+        payload: res.data,
+      });
+      return true;
+    } catch (error) {
+      dispatch({
+        type: 'LOGIN_FAIL',
+        payload: error.response.data.error,
+      });
+      return false;
+    }
+  }
+
   return (
     <GlobalContext.Provider
       value={{
         games: state.games,
         error: state.error,
         userGames: state.userGames,
+        isAuthenticated: state.isAuthenticated,
+        token: state.token,
+        isLoading: state.isLoading,
         getRandomGameList,
         getSearchedGameList,
         getGames,
         addGame,
         deleteGame,
         updateGameSold,
+        register,
+        logout,
+        login,
       }}
     >
       {children}

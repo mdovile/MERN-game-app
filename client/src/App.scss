@@ -4,6 +4,15 @@
     width: 560px;
 }
 
+.Login {
+  padding: 60px 0;
+}
+
+.Login form {
+  margin: 0 auto;
+  max-width: 320px;
+}
+
 .artImageContainer{
   width: 350px;
   height: 200;
@@ -34,6 +43,11 @@
 
 .searchButtonContainer button:hover {
   background: #ccc;
+}
+
+.searchBarContainer{
+  position: relative;
+  top: 8px;
 }
 
 .search-container{

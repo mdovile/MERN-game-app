@@ -3,10 +3,11 @@ import { Table } from 'reactstrap';
 import { AddedGameRow } from './AddedGameRow';
 import { GlobalContext } from '../context/GlobalState.js';
 import { MdModeEdit } from 'react-icons/md';
+import Spinner from './layout/Spinner';
 import TablePagination from './TablePagination';
 
 export const AddedGamesTable = () => {
-  const { userGames, getGames } = useContext(GlobalContext);
+  const { userGames, getGames, isLoading } = useContext(GlobalContext);
   const [currentPage, setCurrentPage] = useState(1);
   const [gamesPerPage] = useState(10);
 
@@ -36,9 +37,9 @@ export const AddedGamesTable = () => {
           </tr>
         </thead>
         <tbody>
-          {currentGames.map((game) => (
-            <AddedGameRow game={game} key={game._id} />
-          ))}
+          {isLoading
+            ? <Spinner/>
+            : currentGames.map((game) => <AddedGameRow game={game} key={game._id} />)}
         </tbody>
       </Table>
       <TablePagination

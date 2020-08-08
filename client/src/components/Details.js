@@ -91,7 +91,7 @@ export const Details = (props) => {
   });
 
   return (
-    <div>
+    <div style={{position: 'relative', top: '8px'}}>
       <Carousel activeIndex={activeIndex} next={next} previous={previous}>
         <CarouselIndicators items={images} activeIndex={activeIndex} onClickHandler={goToIndex} />
         {slides}

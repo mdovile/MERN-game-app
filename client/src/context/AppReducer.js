@@ -4,6 +4,7 @@ export default (state, action) => {
       return {
         ...state,
         games: action.payload,
+        isLoading: false,
       };
 
     case 'GET_SEARCH_RESULTS':
@@ -15,6 +16,7 @@ export default (state, action) => {
       return {
         ...state,
         userGames: action.payload,
+        isLoading: false,
       };
 
     case 'USER_GAME_LIST_ERROR':
@@ -39,6 +41,31 @@ export default (state, action) => {
       return {
         ...state,
         userGames: [...state.userGames, action.payload],
+      };
+    case 'LOGIN_SUCCESS':
+    case 'REGISTER_SUCCESS':
+      localStorage.setItem('token', action.payload.token);
+      return {
+        ...state,
+        ...action.payload,
+        isAuthenticated: true,
+        isLoading: false,
+      };
+    case 'LOGIN_FAIL':
+    case 'LOGOUT':
+    case 'REGISTER_FAIL':
+      localStorage.removeItem('token');
+      return {
+        ...state,
+        token: null,
+        isAuthenticated: false,
+        error: action.payload,
+      };
+
+    case 'LOADING':
+      return {
+        ...state,
+        isLoading: true,
       };
 
     default:
