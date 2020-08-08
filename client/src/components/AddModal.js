@@ -73,8 +73,8 @@ export const AddModal = ({ title, slug }) => {
 
   return (
     <div>
-      <button 
-      id="tooltip"
+      <button
+        id="tooltip"
         type="button"
         style={{
           border: 'none',
@@ -94,7 +94,13 @@ export const AddModal = ({ title, slug }) => {
         </IconContext.Provider>
       </button>
 
-      <Tooltip placement="top" isOpen={tooltipOpen} toggle={handleTooltipToggle} target="tooltip" trigger="click">
+      <Tooltip
+        placement="top"
+        isOpen={tooltipOpen}
+        toggle={handleTooltipToggle}
+        target="tooltip"
+        trigger="click"
+      >
         Log in or register!
       </Tooltip>
 
